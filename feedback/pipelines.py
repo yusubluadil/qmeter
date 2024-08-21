@@ -196,5 +196,11 @@ TASK_PIPELINE = [
                 }
             }
         }
+    },
+    {
+        "$sort": {
+            "branch_name": 1,
+            "services.service_name": 1
+        }
     }
 ]
