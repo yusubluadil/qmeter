@@ -24,24 +24,13 @@ This repository contains a Django project integrated with MongoDB, using Docker 
    MONGO_DB_NAME=qmeterDB
    MONGO_DB_URI=mongodb://mongo:27018/qmeterDB
 
-## Building the Project
+## Building and Starting Services with Docker Compose
 
-Before starting the services, you may need to build or rebuild the Docker images. This is especially important if you have made changes to the Dockerfile or the application code.
+To build the Docker images and start the services defined in the `docker-compose.yml` file, you can use the `docker-compose up` command with the `--build` option. This ensures that the images are rebuilt with the latest changes before starting the containers.
 
-### Building Docker Images
+### Build and Start Services
 
-To build the Docker images defined in the `docker-compose.yml` file, use the following command:
-
-```bash
-docker-compose build
-
-## Starting Services with Docker Compose
-
-To start the services defined in the `docker-compose.yml` file, you use the `docker-compose up` command. This command builds the Docker images (if they do not already exist) and starts the containers.
-
-### Starting Services
-
-To start the services and run them in the foreground, use:
+To build the Docker images (if they do not already exist) and start the containers, use:
 
 ```bash
-docker-compose up
+docker-compose up --build
