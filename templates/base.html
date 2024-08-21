@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qmeter</title>
+</head>
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Branch name</th>
+                <th>Service name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for branch in result %}
+                {% for service in branch.services %}
+                    <tr>
+                        {% if forloop.first %}
+                            <td rowspan="{{ branch.services|length }}">{{ branch.branch_name }}</td>
+                        {% endif %}
+                        <td>{{ service.service_name }}</td>
+                        <td>
+                            100 * ({{ service.rate_counts.0.count }} * 10 
+                            {% if service.rate_counts.1 %}+ {{ service.rate_counts.1.count }} * 5 {% endif %}
+                            {% if service.rate_counts.2 %}+ {{ service.rate_counts.2.count }} * 0 {% endif %}
+                            {% if service.rate_counts.3 %}+ {{ service.rate_counts.3.count }} * -5 {% endif %}
+                            {% if service.rate_counts.4 %}+ {{ service.rate_counts.4.count }} * -10 {% endif %}
+                            ) / (({{ service.rate_counts.0.count }}
+                            {% if service.rate_counts.1 %}+ {{ service.rate_counts.1.count }} {% endif %}
+                            {% if service.rate_counts.2 %}+ {{ service.rate_counts.2.count }} {% endif %}
+                            {% if service.rate_counts.3 %}+ {{ service.rate_counts.3.count }} {% endif %}
+                            {% if service.rate_counts.4 %}+ {{ service.rate_counts.4.count }} {% endif %}
+                            ) * 10) = {{ service.score }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
