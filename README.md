@@ -1,4 +1,4 @@
-# QMeter Project
+# QMeter Task
 
 This repository contains a Django project integrated with MongoDB, using Docker for containerization. This README provides instructions on setting up and running the project.
 
