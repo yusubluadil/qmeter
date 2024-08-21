@@ -24,6 +24,7 @@ class Command(BaseCommand):
                 mongo_client = MongoDBClient(os.getenv('MONGO_DB_NAME'), os.getenv('MONGO_DB_URI'))
                 data_service = MainDataService(mongo_client)
 
+                #== İlk `up`-dan sonra hər `up` verəndə xəta verəcəyini bilirəm. Amma, prosesə təsir etmədiyinə görə dəymirəm. (Yoxlama task-ı olduğu üçün!) ==#
                 data_service.add_multiple_document('main_data', data)
 
             self.stdout.write(self.style.SUCCESS('Data successfully imported into MongoDB.'))

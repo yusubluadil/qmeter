@@ -12,16 +12,16 @@ services:
 
   web:
     build: .
-    container_name: django
+    container_name: web
     command: >
       sh -c "
       python manage.py migrate &&
-      python manage.py collectstatic --noinput &&
       python manage.py json_to_mongodb ./feedback.json &&
       gunicorn core.wsgi:application --bind 0.0.0.0:8000
       "
     volumes:
       - .:/app
+      - ./static:/app/static
     ports:
       - "8000:8000"
     depends_on:
